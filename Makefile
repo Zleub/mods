@@ -2,14 +2,14 @@ NAME = libmods.a
 SRC = $(shell find ./src -name '*\.c')
 OBJ = $(subst .c,.o, $(SRC))
 
-HEADDIR	?= $(PWD)/inc
+HEADDIR	?= -I$(PWD)/inc -I$(PWD)/libft/inc
 CC		?= clang
-CFLAGS	?= -I$(HEADDIR) -Wall -Werror -Wextra -g3
+CFLAGS	?= $(HEADDIR) -Wall -Werror -Wextra -g3
 
 all: $(NAME) test
 
-test: libmods.a
-	$(CC) $(CFLAGS) -lmods -L. -o test test.c
+test: libmods.a test.c
+	$(CC) $(CFLAGS) -lmods -L. -Llibft -lft -o test test.c
 
 $(NAME): $(OBJ)
 	ar rc $@ $^
