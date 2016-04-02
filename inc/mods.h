@@ -28,7 +28,6 @@ struct s_value {
 struct s_table {
 	unsigned int	size;
 	struct s_value	**array;
-	struct s_value	**hash_array;
 };
 
 typedef struct s_value t_value;

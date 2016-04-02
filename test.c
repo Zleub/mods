@@ -64,8 +64,6 @@ void debug(t_table *t)
 	while (i < t->size) {
 		if (t->array[i])
 			print_value(t->array[i], 0);
-		if (t->hash_array[i])
-			print_value(t->hash_array[i], 0);
 		i += 1;
 	}
 }
@@ -82,14 +80,15 @@ int main(void)
 
 	t_table *c = init(8);
 
-	// int i = 0;
-	// while (i < 32)
-	// {
-	// 	char *buf = random_string(1);
+	int i = 0;
+	while (i < 32)
+	{
+		char *buf = random_string(1);
 
-	// 	set(c, buf, value(DOUBLE, (union u_value)(double)i));
-	// 	i += 1;
-	// }
+		set(c, buf, value(DOUBLE, (union u_value)(double)i));
+		free(buf);
+		i += 1;
+	}
 
 	set(c, "Arno", Double(4242));
 	set(c, "arno", Pointer(&random_string));
