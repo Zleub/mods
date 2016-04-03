@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   table.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/04/03 16:21:55 by adebray           #+#    #+#             */
+/*   Updated: 2016/04/03 16:45:20 by adebray          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <mods.h>
 
-t_value NILL = {
+t_value g_nill = {
 	.k = "nil",
 	.u = {
 		.p = NULL
@@ -9,9 +21,10 @@ t_value NILL = {
 	.n = NULL
 };
 
-static t_value *assign(t_value **v, t_value *nv)
+static t_value	*assign(t_value **v, t_value *nv)
 {
-	if (*v) {
+	if (*v)
+	{
 		if (!ft_strcmp((*v)->k, nv->k))
 		{
 			nv->n = (*v)->n;
@@ -20,14 +33,14 @@ static t_value *assign(t_value **v, t_value *nv)
 			*v = nv;
 		}
 		else
-			return assign(&((*v)->n), nv);
+			return (assign(&((*v)->n), nv));
 	}
 	else
 		(*v) = nv;
 	return (*v);
 }
 
-t_value	*set(t_table *t, char *key, t_value *v)
+t_value			*table_set(t_table *t, char *key, t_value *v)
 {
 	unsigned int h;
 
@@ -36,19 +49,19 @@ t_value	*set(t_table *t, char *key, t_value *v)
 	return (assign(&t->array[h], v));
 }
 
-static t_value *solve_collision(t_value *v, char *key)
+static t_value	*solve_collision(t_value *v, char *key)
 {
 	if (!v)
-		return (&NILL);
+		return (&nill);
 	else if (!ft_strcmp(v->k, key))
 		return (v);
 	else if (v->n)
 		return (solve_collision(v->n, key));
 	else
-		return (&NILL);
+		return (&nill);
 }
 
-t_value *get(t_table *t, char *key)
+t_value			*table_get(t_table *t, char *key)
 {
 	unsigned int h;
 
@@ -56,17 +69,17 @@ t_value *get(t_table *t, char *key)
 	return (solve_collision(t->array[h], key));
 }
 
-t_table	*init(int size)
+t_table			*table_init(int size)
 {
-	t_table *t;
+	int			i;
+	t_table		*t;
 
 	if (!(t = malloc(sizeof(t_table))))
 		return (NULL);
 	else if (!(t->array = malloc(sizeof(t_value *) * size)))
 		return (NULL);
-
 	t->size = size;
-	int i = 0;
+	i = 0;
 	while (i < size)
 	{
 		t->array[i] = NULL;

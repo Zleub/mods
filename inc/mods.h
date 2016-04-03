@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mods.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/04/03 15:44:58 by adebray           #+#    #+#             */
+/*   Updated: 2016/04/03 16:32:36 by adebray          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MODS_H
 # define MODS_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <table.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <table.h>
 
 #endif
