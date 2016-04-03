@@ -1,30 +1,15 @@
-#include <libft.h>
 #include <mods.h>
 
-t_value	*value(int e, union u_value u)
-{
-	t_value *val = malloc(sizeof(t_value));
-	ft_bzero(val, sizeof(t_value));
+t_value NILL = {
+	.k = "nil",
+	.u = {
+		.p = NULL
+	},
+	.e = NIL,
+	.n = NULL
+};
 
-	val->e = e;
-	val->u = u;
-	return val;
-}
-
-unsigned int hash(unsigned int size, char *line)
-{
-	unsigned int	hashich;
-	int				c;
-
-	hashich = 5381;
-	while ((c = *line++))
-		hashich = ((hashich << 5) + hashich) ^ c;
-	if (hashich > size)
-		return (hashich % size);
-	return (hashich);
-}
-
-t_value *assign(t_value **v, t_value *nv)
+static t_value *assign(t_value **v, t_value *nv)
 {
 	if (*v) {
 		if (!ft_strcmp((*v)->k, nv->k))
@@ -51,16 +36,7 @@ t_value	*set(t_table *t, char *key, t_value *v)
 	return (assign(&t->array[h], v));
 }
 
-t_value NILL = {
-	.k = "nil",
-	.u = {
-		.p = NULL
-	},
-	.e = NIL,
-	.n = NULL
-};
-
-t_value *solve_collision(t_value *v, char *key)
+static t_value *solve_collision(t_value *v, char *key)
 {
 	if (!v)
 		return (&NILL);

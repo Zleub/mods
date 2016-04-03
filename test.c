@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-
-void	ft_bzero(void *s, size_t n);
-float	get_use(t_table *t);
+#include <libft.h>
 
 char *random_string(int size)
 {
@@ -72,30 +70,19 @@ void debug(t_table *t)
 #define Pointer(x) value(POINTER, (union u_value)(void *)x)
 #define String(x) value(STRING, (union u_value)(void *)x)
 
-#include <libft.h>
-
 int main(void)
 {
 	srand(time(NULL));
 
-	t_table *c = init(8);
+	t_table *t = init(8);
 
-	int i = 0;
-	while (i < 32)
-	{
-		char *buf = random_string(1);
+	set(t, "Arno", Double(4242));
+	set(t, "arno", Pointer(&random_string));
+	set(t, "arnaud", Double(4242));
+	set(t, "adebray", String("Hello World"));
 
-		set(c, buf, value(DOUBLE, (union u_value)(double)i));
-		free(buf);
-		i += 1;
-	}
+	printf("%f\n", get(t, "Arno")->u.d);
+	printf("%s\n", ((char *(*)(int))(get(t, "arno")->u.p))(4));
 
-	set(c, "Arno", Double(4242));
-	set(c, "arno", Pointer(&random_string));
-	set(c, "arnaud", Double(4242));
-	set(c, "adebray", String("Hello World"));
-
-	debug(c);
-	while (42) ;
 	return (0);
 }
