@@ -17,72 +17,36 @@ char *random_string(int size)
 	return str;
 }
 
-char *enum_to_string(int e) {
-	if (e == NIL)
-		return ("nil");
-	else if (e == DOUBLE)
-		return ("double");
-	else if (e == FLOAT)
-		return ("float");
-	else if (e == STRING)
-		return ("string");
-	else if (e == POINTER)
-		return ("pointer");
-	else
-		return ("Error");
-}
-
-void print_value(t_value *v, int lvl)
-{
-	int i = lvl;
-	while (i) {
-		printf("  ");
-		i -= 1;
-	}
-
-	printf("%s, %s -> ", v->k, enum_to_string(v->e));
-	if (v->e == DOUBLE)
-		printf("%f", v->u.d);
-	else if (v->e == FLOAT)
-		printf("%f", v->u.f);
-	else if (v->e == POINTER)
-		printf("%p", v->u.p);
-	else if (v->e == STRING)
-		printf("%s", v->u.p);
-
-	printf("\n");
-	if (v->n)
-		print_value(v->n, lvl + 1);
-}
-
-void debug(t_table *t)
-{
-	unsigned int i = 0;
-
-	while (i < t->size) {
-		if (t->array[i])
-			print_value(t->array[i], 0);
-		i += 1;
-	}
-}
 
 #define Double(x) value(DOUBLE, (union u_value)(double)x)
 #define Pointer(x) value(POINTER, (union u_value)(void *)x)
 #define String(x) value(STRING, (union u_value)(void *)x)
 
+typedef char *(*t_f)(int);
+
+#define VAR(...) __VA_ARGS__
+
 int main(void)
 {
 	srand(time(NULL));
 
-	t_table *t = init(8);
+	t_table *t = table_init(8);
 
-	set(t, "Arno", Double(4242));
-	set(t, "arno", Pointer(&random_string));
-	set(t, "arnaud", Double(4242));
-	set(t, "adebray", String("Hello World"));
+	table_set(t, "Arno", Double(4242));
+	table_set(t, "arno", Pointer(&random_string));
+	table_set(t, "arnaud", Double(4242));
+	table_set(t, "adebray", String("Hello World"));
 
-	printf("%f\n", get(t, "Arno")->u.d);
-	printf("%s\n", ((char *(*)(int))(get(t, "arno")->u.p))(4));
+	printf("%f\n", table_get(t, "Arno")->u.d);
+	printf("%s\n", ( (char *(*)(int)) (table_get(t, "arno")->u.p) )(4));
 
+	int i = 0;
+	while (i < 10)
+	{
+		table_set(t, random_string(10), Double(i));
+		i += 1;
+	}
+
+	table_debug(t);
 	return (0);
 }
