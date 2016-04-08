@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/03 16:21:55 by adebray           #+#    #+#             */
-/*   Updated: 2016/04/03 16:45:20 by adebray          ###   ########.fr       */
+/*   Updated: 2016/04/08 14:43:41 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ t_value			*table_set(t_table *t, char *key, t_value *v)
 static t_value	*solve_collision(t_value *v, char *key)
 {
 	if (!v)
-		return (&nill);
+		return (&g_nill);
 	else if (!ft_strcmp(v->k, key))
 		return (v);
 	else if (v->n)
 		return (solve_collision(v->n, key));
 	else
-		return (&nill);
+		return (&g_nill);
 }
 
 t_value			*table_get(t_table *t, char *key)
