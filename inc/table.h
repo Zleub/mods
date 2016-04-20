@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/03 16:24:37 by adebray           #+#    #+#             */
-/*   Updated: 2016/04/03 16:42:39 by adebray          ###   ########.fr       */
+/*   Updated: 2016/04/20 16:38:39 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ t_value					*table_get(t_table *t, char *key);
 t_value					*table_value(int e, union u_value u);
 
 void					table_debug(t_table *t);
+void					value_debug(t_value *t, int lvl);
 
 #endif

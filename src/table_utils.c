@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/03 16:24:09 by adebray           #+#    #+#             */
-/*   Updated: 2016/04/03 16:36:26 by adebray          ###   ########.fr       */
+/*   Updated: 2016/04/20 16:37:24 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char			*enum_to_string(int e)
 
 #define PADD(size) while (i) { printf("  "); i -= 1; }
 
-static void		print_value(t_value *v, int lvl)
+void			value_debug(t_value *v, int lvl)
 {
 	int		i;
 
@@ -71,7 +71,7 @@ static void		print_value(t_value *v, int lvl)
 		printf("%s", v->u.p);
 	printf("\n");
 	if (v->n)
-		print_value(v->n, lvl + 1);
+		value_debug(v->n, lvl + 1);
 }
 
 void			table_debug(t_table *t)
@@ -82,7 +82,7 @@ void			table_debug(t_table *t)
 	while (i < t->size)
 	{
 		if (t->array[i])
-			print_value(t->array[i], 0);
+			value_debug(t->array[i], 0);
 		i += 1;
 	}
 }
