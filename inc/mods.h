@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/03 15:44:58 by adebray           #+#    #+#             */
-/*   Updated: 2016/04/03 16:32:36 by adebray          ###   ########.fr       */
+/*   Updated: 2016/04/23 19:25:54 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <value.h>
 # include <table.h>
+# include <stack.h>
+
 
 #endif

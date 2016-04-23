@@ -1,8 +1,8 @@
 #include <mods.h>
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include <libft.h>
 
 char *random_string(int size)
 {
@@ -26,27 +26,50 @@ typedef char *(*t_f)(int);
 
 #define VAR(...) __VA_ARGS__
 
+// int main(void)
+// {
+// 	srand(time(NULL));
+
+// 	t_table *t = table_init(8);
+
+// 	table_set(t, "Arno", Double(4242));
+// 	table_set(t, "arno", Pointer(&random_string));
+// 	table_set(t, "arnaud", Double(4242));
+// 	table_set(t, "adebray", String("Hello World"));
+
+// 	printf("%f\n", table_get(t, "Arno")->u.d);
+// 	printf("%s\n", ( (char *(*)(int)) (table_get(t, "arno")->u.p) )(4));
+
+// 	int i = 0;
+// 	while (i < 10)
+// 	{
+// 		table_set(t, random_string(10), Double(i));
+// 		i += 1;
+// 	}
+
+// 	table_debug(t);
+// 	return (0);
+// }
+
 int main(void)
 {
-	srand(time(NULL));
+	t_stack *s = stack_init( Double(1) );
 
-	t_table *t = table_init(8);
+	s = stack_push(s, Double(2) );
+	s = stack_push(s, Double(3) );
 
-	table_set(t, "Arno", Double(4242));
-	table_set(t, "arno", Pointer(&random_string));
-	table_set(t, "arnaud", Double(4242));
-	table_set(t, "adebray", String("Hello World"));
+	stack_debug(s);
+	printf("\n");
 
-	printf("%f\n", table_get(t, "Arno")->u.d);
-	printf("%s\n", ( (char *(*)(int)) (table_get(t, "arno")->u.p) )(4));
+	s = stack_push(s, Double(4) );
+	s = stack_push(s, Double(5) );
 
-	int i = 0;
-	while (i < 10)
-	{
-		table_set(t, random_string(10), Double(i));
-		i += 1;
-	}
+	s = stack_pop(s);
 
-	table_debug(t);
+	s = stack_push(s, Double(6) );
+	s = stack_push(s, Double(7) );
+
+	stack_debug(s);
+	printf("\n");
 	return (0);
 }
