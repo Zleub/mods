@@ -6,11 +6,11 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/03 16:21:55 by adebray           #+#    #+#             */
-/*   Updated: 2016/04/08 14:43:41 by adebray          ###   ########.fr       */
+/*   Updated: 2016/04/23 18:50:02 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mods.h>
+#include <table.h>
 
 t_value g_nill = {
 	.k = "nil",
