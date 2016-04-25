@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/03 16:21:55 by adebray           #+#    #+#             */
-/*   Updated: 2016/04/23 18:50:02 by adebray          ###   ########.fr       */
+/*   Updated: 2016/04/24 15:19:16 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ t_value			*table_set(t_table *t, char *key, t_value *v)
 
 	h = hash(t->size, key);
 	v->k = ft_strdup(key);
+	if (!t->array[h])
+		t->e_nbr += 1;
 	return (assign(&t->array[h], v));
 }
 
@@ -79,6 +81,7 @@ t_table			*table_init(int size)
 	else if (!(t->array = malloc(sizeof(t_value *) * size)))
 		return (NULL);
 	t->size = size;
+	t->e_nbr = 0;
 	i = 0;
 	while (i < size)
 	{

@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/23 18:32:47 by adebray           #+#    #+#             */
-/*   Updated: 2016/04/23 19:29:15 by adebray          ###   ########.fr       */
+/*   Updated: 2016/04/25 18:02:37 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ struct					s_value
 };
 
 t_value					*value(int e, union u_value u);
+void					call(t_value *v, int (*f)());
 void					value_debug(t_value *t, int lvl);
 char					*enum_to_string(int e);
 

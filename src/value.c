@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/23 18:36:48 by adebray           #+#    #+#             */
-/*   Updated: 2016/04/23 19:22:19 by adebray          ###   ########.fr       */
+/*   Updated: 2016/04/25 18:02:24 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ t_value			*value(int e, union u_value u)
 	val->e = e;
 	val->u = u;
 	return (val);
+}
+
+void			call(t_value *v, int (*f)())
+{
+	f(v);
+	if (v->n)
+		call(v->n, f);
 }
 
 char			*enum_to_string(int e)

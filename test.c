@@ -26,50 +26,79 @@ typedef char *(*t_f)(int);
 
 #define VAR(...) __VA_ARGS__
 
-// int main(void)
+// void			call(t_value *v, int (*f)())
 // {
-// 	srand(time(NULL));
+// 	f(v);
+// 	if (v->n)
+// 		call(v->n, f);
+// }
 
-// 	t_table *t = table_init(8);
-
-// 	table_set(t, "Arno", Double(4242));
-// 	table_set(t, "arno", Pointer(&random_string));
-// 	table_set(t, "arnaud", Double(4242));
-// 	table_set(t, "adebray", String("Hello World"));
-
-// 	printf("%f\n", table_get(t, "Arno")->u.d);
-// 	printf("%s\n", ( (char *(*)(int)) (table_get(t, "arno")->u.p) )(4));
-
-// 	int i = 0;
-// 	while (i < 10)
+// void			table_iter(t_table *t, int (*f)())
+// {
+// 	unsigned int i = 0;
+// 	while (i < t->size)
 // 	{
-// 		table_set(t, random_string(10), Double(i));
+// 		if (t->array[i])
+// 			call(t->array[i], f);
 // 		i += 1;
 // 	}
+// }
 
-// 	table_debug(t);
+// int test(t_value *v)
+// {
+// 	ft_printf("%s\n", enum_to_string(v->e));
 // 	return (0);
 // }
 
 int main(void)
 {
-	t_stack *s = stack_init( Double(1) );
+	srand(time(NULL));
 
-	s = stack_push(s, Double(2) );
-	s = stack_push(s, Double(3) );
+	t_table *t = table_init(32);
 
-	stack_debug(s);
+	table_set(t, "Arno", Double(4242));
+	table_set(t, "arno", Pointer(&random_string));
+	table_set(t, "arnaud", Double(4242));
+	table_set(t, "adebray", String("Hello World"));
+
+	printf("%f\n", table_get(t, "Arno")->u.d);
+	printf("%s\n", ( (char *(*)(int)) (table_get(t, "arno")->u.p) )(4));
+
+	table_debug(t);
 	printf("\n");
 
-	s = stack_push(s, Double(4) );
-	s = stack_push(s, Double(5) );
 
-	s = stack_pop(s);
+	// int i = 0;
+	// while (i < 10)
+	// {
+	// 	table_set(t, random_string(10), Double(i));
+	// 	i += 1;
+	// }
 
-	s = stack_push(s, Double(6) );
-	s = stack_push(s, Double(7) );
+	// table_iter(t, test);
 
-	stack_debug(s);
-	printf("\n");
 	return (0);
 }
+
+// int main(void)
+// {
+// 	t_stack *s = stack_init( Double(1) );
+
+// 	s = stack_push(s, Double(2) );
+// 	s = stack_push(s, Double(3) );
+
+// 	stack_debug(s);
+// 	printf("\n");
+
+// 	s = stack_push(s, Double(4) );
+// 	s = stack_push(s, Double(5) );
+
+// 	s = stack_pop(s);
+
+// 	s = stack_push(s, Double(6) );
+// 	s = stack_push(s, Double(7) );
+
+// 	stack_debug(s);
+// 	printf("\n");
+// 	return (0);
+// }

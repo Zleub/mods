@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/03 16:24:09 by adebray           #+#    #+#             */
-/*   Updated: 2016/04/23 19:09:10 by adebray          ###   ########.fr       */
+/*   Updated: 2016/04/25 18:11:13 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@ void			table_debug(t_table *t)
 	{
 		if (t->array[i])
 			value_debug(t->array[i], 0);
+		i += 1;
+	}
+}
+
+void			table_iter(t_table *t, int (*f)())
+{
+	unsigned int i = 0;
+	while (i < t->size)
+	{
+		if (t->array[i])
+			call(t->array[i], f);
 		i += 1;
 	}
 }
