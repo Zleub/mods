@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/03 16:21:55 by adebray           #+#    #+#             */
-/*   Updated: 2016/04/24 15:19:16 by adebray          ###   ########.fr       */
+/*   Updated: 2016/04/27 14:01:33 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_value g_nill = {
 	.n = NULL
 };
 
-static t_value	*assign(t_value **v, t_value *nv)
+static t_value	*assign(t_table *t, t_value **v, t_value *nv)
 {
 	if (*v)
 	{
@@ -33,10 +33,12 @@ static t_value	*assign(t_value **v, t_value *nv)
 			*v = nv;
 		}
 		else
-			return (assign(&((*v)->n), nv));
+			return (assign(t, &((*v)->n), nv));
 	}
-	else
+	else {
 		(*v) = nv;
+		t->e_nbr += 1;
+	}
 	return (*v);
 }
 
@@ -46,9 +48,7 @@ t_value			*table_set(t_table *t, char *key, t_value *v)
 
 	h = hash(t->size, key);
 	v->k = ft_strdup(key);
-	if (!t->array[h])
-		t->e_nbr += 1;
-	return (assign(&t->array[h], v));
+	return (assign(t, &t->array[h], v));
 }
 
 static t_value	*solve_collision(t_value *v, char *key)
