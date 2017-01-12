@@ -1,0 +1,29 @@
+#define ALLOCATOR(type) void* ft_allocator_##type(void) { /*
+*/	return malloc(sizeof(type)); /*
+*/ } /*
+*/
+
+#define PARSER(token) int ft_parse_##token(char c) { /*
+*/	return ( c == *#token ); /*
+*/ } /*
+*/
+
+#define NUM_LIST \
+	PARSER(1)\
+	PARSER(2)\
+	PARSER(3)\
+	PARSER(4)\
+	PARSER(5)\
+	PARSER(6)\
+	PARSER(7)\
+	PARSER(8)\
+	PARSER(9)
+
+NUM_LIST
+
+#define ALPHA_LIST \
+	PARSER(a)\
+	PARSER(b)\
+	PARSER(c)
+
+ALPHA_LIST
