@@ -1,7 +1,9 @@
 [submodule "libft"]
 	path = libft
 	url = https://github.com/Zleub/libft.git
+	branch = master
 
 [submodule "ft_printf"]
 	path = ft_printf
 	url = https://github.com/Zleub/ft_printf.git
+	branch = master
