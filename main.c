@@ -1,35 +1,40 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-#define E(t) t,
-#define E_LIST E(CHAR) E(SHORT) E(INT) E(DOUBLE) E(E_TYPE_LEN)
-enum e_types {
-	E_LIST
-};
+#define TYPES \
+	T(char, t_int8) \
+	T(unsigned char, t_uint8) \
+	T(short, t_int16) \
+	T(unsigned short, t_uint16) \
+	T(int, t_int32) \
+	T(unsigned int, t_uint32) \
+	T(long, t_int64) \
+	T(unsigned long, t_uint64) \
+	T(void *, t_uptr) \
+	T(union u_value, t_value)
 
-#define A(t) ALLOCATOR(t)
-#define ALLOCATOR_LIST A(char) A(short) A(int) A(double)
-ALLOCATOR_LIST
+#define T(type, def) typedef type def;
+TYPES
 
-#undef A
-#define A(t) t __##t;
+#undef T
+#define T(type, def) printf(#def ": %zu [%zu]\n", sizeof(type), sizeof(type) * 8);
+
 union u_value {
-	ALLOCATOR_LIST
+	t_int8 int8;
+	t_int16 int16;
+	t_int32 int32;
+	t_int64 int64;
 };
 
-#define SET_TYPE(e, t) ((t)(e.__##t))
-#define GET_TYPE(e, t) ((t)(e.__##t))
-
-typedef union u_value t_value;
+#define INT8(x) (t_value){ .int8 = x }
+#define INT16(x) (t_value){ .int16 = x }
+#define INT32(x) (t_value){ .int32 = x }
+#define INT64(x) (t_value){ .int64 = x }
 
 int main(void)
 {
-	t_value v;
-
-	v.__int = 42;
-	printf("%d\n", GET_TYPE(v, int));
-	printf("%s -> ft_parse_1('1')\n", ft_parse_1('1') ? "true" : "false");
-	printf("%s -> ft_parse_1('2')\n", ft_parse_1('2') ? "true" : "false");
-	printf("%s -> ft_parse_a('a')\n", ft_parse_a('a') ? "true" : "false");
+	t_value v = INT8(42);
+	printf("%d\n", v.int8);
+	v = INT16(1024);
+	printf("%d\n", v.int16);
 	return (0);
 }
