@@ -6,8 +6,8 @@ HEADDIR ?= -I$(PWD)/inc
 CC ?= clang
 CFLAGS ?= $(HEADDIR) -Wall -Werror -Wextra -O3
 
-all: $(NAME) main.c
-	$(CC) $(CFLAGS) -lmods -L. -o a.out main.c
+all: main.c
+	$(CC) $(CFLAGS) -o a.out main.c
 
 test: libmods.a test.c
 	$(CC) $(CFLAGS) -lmods -L. -o test test.c
