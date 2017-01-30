@@ -1,3 +1,4 @@
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -75,7 +76,8 @@ unsigned int	hash(char *line)
 	return (h);
 }
 
-#define HASH_TEST(key) printf("%-10s --> %10d\n", key, hash(key))
+#define HASH_TEST(key) printf("%10d", hash((char*)key))
+
 int main(void)
 {
 	debug_types();
@@ -83,13 +85,23 @@ int main(void)
 	for (int i = 0; i < 255; ++i)
 		for (int j = 0; j < 255; ++j)
 		{
-			char s[2];
+			unsigned char s[2];
 			s[0] = i;
 			s[1] = j;
+
+			printf("{ 0x");
+			for (int i = 0; i < 2; ++i)
+			{
+				printf("%02x", s[i]);
+			}
+			printf(", ");
 			HASH_TEST(s);
+			printf("},\n");
 		}
 
 	unsigned char s[10] = { 0 };
+	unsigned char *res[1024 * 1024];
+
 	for (int i = 0; i < 1024 * 1024; ++i)
 	{
 		for (int i = 0; i < 10; i++)
@@ -103,8 +115,13 @@ int main(void)
 		{
 			printf("%02x", s[i]);
 		}
+		printf(" ");
+
+		res[i] = (unsigned char*)malloc(10);
+		strncpy((char*)res[i], (char*)s, 9);
 		HASH_TEST((char*)s);
 	}
+
 
 
 	return (0);
