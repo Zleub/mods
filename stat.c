@@ -9,12 +9,12 @@ struct test {
 };
 
 struct count {
-	unsigned long int i;
+	int i;
 	unsigned long int c;
 	struct count *next;
 };
 
-void add(struct count *head, unsigned long int i) {
+void add(struct count *head, int i) {
 	if (head->i == i)
 		head->c += 1;
 	else if (!head->next) {
@@ -27,8 +27,8 @@ void add(struct count *head, unsigned long int i) {
 		add(head->next, i);
 }
 
-unsigned long max = 0;
-unsigned long back = 0;
+long max = 0;
+long back = 0;
 void print(struct count *h) {
 //	printf("%lu [%lu]\n", h->i, h->c);
 	if (h->c > max) {
