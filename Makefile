@@ -2,20 +2,18 @@ NAME = libmods.a
 SRC = $(shell find src -name '*\.c')
 OBJ = $(subst .c,.o, $(SRC))
 
-HEADDIR ?= -I$(PWD)/inc
-CC = clang
+HEADDIR ?= -I$(PWD)/inc -I$(PWD)/libft/inc
+CC ?= clang
 CFLAGS ?= $(HEADDIR) -Wall -Werror -Wextra -O3
+LDFLAGS ?= -lft -Llibft -lmods -L.
 
 all: $(NAME) libft printf out test
 
 out: main.c
-	$(CC) $(CFLAGS) -o a.out main.c
-
-cpp: main.c
-	$(CC) -E main.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -o a.out main.c
 
 test: $(NAME) test.c
-	$(CC) $(CFLAGS) -lmods -L. -o test test.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -o test test.c
 
 $(NAME): $(OBJ)
 	ar rc $@ $^
