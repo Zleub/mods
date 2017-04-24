@@ -53,6 +53,7 @@ void table_set(t_table *t, char *key, t_value value) {
 		if (t->array[i] == &t->table[h])
 			printf("got a collision %s\n", key);
 		if (!t->array[i]) {
+			printf("assigning t[%lu]: %lx\n", i, value.int64);
 			t->array[i] = &t->table[h];
 			break ;
 		}
@@ -74,6 +75,9 @@ int main(void)
 
 	t_uint8 huit = 8;
 	table_set(t, "huit", (t_value)(void*)&huit);
+
+	char s[] = "10";
+	table_set(t, "dix", (t_value)(void*)s);
 
 	debug_table(t);
 	return (0);
