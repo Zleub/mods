@@ -19,7 +19,7 @@
 	T(long, int64) \
 	T(unsigned long, uint64) \
 	T(void *, uptr) \
-	T(union u_value, value) \
+	T(struct s_value, value) \
 	T(struct s_table, table) \
 	VECTORS
 
@@ -34,16 +34,28 @@ union u_value {
 	t_uptr	ptr;
 };
 
+enum e_types {
+	NIL,
+	NUMBER,
+	STRING,
+	POINTER
+};
+
+struct s_value {
+	union u_value	value;
+	t_int8			tag;
+};
+
 t_value nil = {
-	.ptr = NULL
+	.tag = 0
 };
 
 struct s_table
 {
-	t_uint64 size;
-	t_value *table;
-	t_table *metatable;
-	t_uptr	*array;
+	t_uint64		size;
+	t_uptr			*table;
+	union u_value	*metatable;
+	t_value			*array;
 };
 
 #define INT8(x) (t_value){ .int8 = x }
